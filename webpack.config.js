@@ -1,16 +1,20 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack')
+const path = require('path')
+
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = 'development'
+}
 
 // variables
-var isProduction =
-  process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
-var sourcePath = path.join(__dirname, './src');
-var outPath = path.join(__dirname, './build');
+const isProduction =
+  process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production'
+const sourcePath = path.join(__dirname, './src')
+const outPath = path.join(__dirname, './build')
 
 // plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 
 module.exports = {
   context: sourcePath,
@@ -31,7 +35,7 @@ module.exports = {
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
     alias: {
-      app: path.resolve(__dirname, 'src/app/'),
+      app: path.resolve(__dirname, 'src/app'),
       'react-dom': '@hot-loader/react-dom',
     },
   },
@@ -43,7 +47,35 @@ module.exports = {
         use: [
           !isProduction && {
             loader: 'babel-loader',
-            options: { plugins: ['react-hot-loader/babel'] },
+            options: {
+              plugins: [
+                [
+                  require.resolve('babel-plugin-module-resolver'),
+                  {
+                    root: [process.cwd()],
+                    alias: {
+                      app: ['src/app'],
+                      'app/*': ['src/app/*'],
+                    }
+                  }
+                ],
+                'react-hot-loader/babel',
+                'emotion',
+                [
+                  '@babel/plugin-proposal-decorators',
+                  {
+                    legacy: true
+                  }
+                ],
+                [
+                  '@babel/plugin-proposal-class-properties',
+                  {
+                    loose: true
+                  }
+                ],
+              ],
+              presets: ['react-app', '@emotion/babel-preset-css-prop'],
+            },
           },
           'ts-loader',
         ].filter(Boolean),
@@ -145,4 +177,4 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
   },
-};
+}

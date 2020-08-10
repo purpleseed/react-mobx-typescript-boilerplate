@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "prettier/@typescript-eslint",
+    "prettier/react",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "standard-with-typescript"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "import", "prettier", "react"
+  ],
+  "rules": {
+    "@typescript-eslint/semi": "off",
+    "promise/param-names": 0,
+    "import/no-unresolved": 0,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "caughtErrors": "all",
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/restrict-template-expressions": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/strict-boolean-expressions": 0,
+    "@typescript-eslint/promise-function-async": 0,
+    "@typescript-eslint/require-array-sort-compare": 0,
+    "comma-dangle": "off",
+    "react/display-name": "off"
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
+}

@@ -1,24 +1,44 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "target": "es5",
-    "jsx": "react",
+    "target": "es6",
     "module": "es6",
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2017",
+      "esnext"
+    ],
     "moduleResolution": "node",
+    "allowJs": false,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "declaration": false,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "noUnusedLocals": true,
-    "removeComments": true,
-    "strictNullChecks": false,
+    "baseUrl": ".",
     "outDir": "build",
-    "lib": ["es6", "es7", "dom"],
-    "baseUrl": "src",
     "paths": {
-      "app/*": ["./app/*"]
+      "app": ["src/app"],
+      "app/*": ["src/app/*"],
     }
   },
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
